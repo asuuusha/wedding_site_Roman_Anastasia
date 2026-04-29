@@ -1144,49 +1144,34 @@
   </audio>
 
   <script>
+  document.addEventListener("DOMContentLoaded", () => {
     const envelopeScreen = document.getElementById("envelopeScreen");
     const invitation = document.getElementById("invitation");
+
+    if (invitation && envelopeScreen) {
+      invitation.addEventListener("click", () => {
+        invitation.classList.add("open");
+
+        setTimeout(() => {
+          envelopeScreen.classList.add("hidden");
+          document.body.classList.remove("locked");
+          window.scrollTo({ top: 0, behavior: "instant" });
+        }, 1350);
+      });
+    }
+
     const musicButton = document.getElementById("musicButton");
     const musicPlayer = document.getElementById("musicPlayer");
     const musicProgress = document.getElementById("musicProgress");
     const weddingMusic = document.getElementById("weddingMusic");
-    const timeline = document.getElementById("timeline");
-    const timelineSvg = document.getElementById("timelineSvg");
-    const motionPath = document.getElementById("motionPath");
-    const movingHeart = document.getElementById("movingHeart");
-    const countDays = document.getElementById("countDays");
-    const countHours = document.getElementById("countHours");
-    const countMinutes = document.getElementById("countMinutes");
-    const countSeconds = document.getElementById("countSeconds");
 
-    function openEnvelope() {
-      if (!invitation || !envelopeScreen) return;
-
-      invitation.classList.add("open");
-
-      setTimeout(() => {
-        envelopeScreen.classList.add("hidden");
-        document.body.classList.remove("locked");
-        window.scrollTo({ top: 0, behavior: "instant" });
-      }, 1350);
-    }
-
-    if (invitation) {
-      invitation.addEventListener("click", openEnvelope);
-    }
-
-    function setMusicProgress() {
-      if (!weddingMusic || !musicProgress || !weddingMusic.duration) return;
-    
-      const progress = (weddingMusic.currentTime / weddingMusic.duration) * 100;
-      musicProgress.style.width = `${progress}%`;
-    }
-    
     if (musicButton && weddingMusic && musicPlayer) {
+      musicButton.setAttribute("type", "button");
+
       musicButton.addEventListener("click", async (event) => {
         event.preventDefault();
         event.stopPropagation();
-    
+
         try {
           if (weddingMusic.paused) {
             await weddingMusic.play();
@@ -1196,12 +1181,17 @@
             musicPlayer.classList.remove("playing");
           }
         } catch (error) {
-          console.log("Ошибка запуска музыки:", error);
+          alert("Музыка не запустилась. Проверь, что файл лежит по пути assets/audio/wedding-song.mp3");
+          console.error(error);
         }
       });
-    
-      weddingMusic.addEventListener("timeupdate", setMusicProgress);
-    
+
+      weddingMusic.addEventListener("timeupdate", () => {
+        if (!weddingMusic.duration) return;
+        const progress = (weddingMusic.currentTime / weddingMusic.duration) * 100;
+        musicProgress.style.width = `${progress}%`;
+      });
+
       weddingMusic.addEventListener("ended", () => {
         musicPlayer.classList.remove("playing");
         musicProgress.style.width = "0%";
@@ -1210,9 +1200,7 @@
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
+        if (entry.isIntersecting) entry.target.classList.add("visible");
       });
     }, {
       threshold: 0.18,
@@ -1220,6 +1208,11 @@
     });
 
     document.querySelectorAll(".reveal, .timeline, .month-calendar").forEach((el) => observer.observe(el));
+
+    const timeline = document.getElementById("timeline");
+    const timelineSvg = document.getElementById("timelineSvg");
+    const motionPath = document.querySelector(".timeline #motionPath");
+    const movingHeart = document.getElementById("movingHeart");
 
     function clamp(value, min, max) {
       return Math.min(Math.max(value, min), max);
@@ -1233,20 +1226,29 @@
       const start = viewportH * 0.72;
       const end = -rect.height * 0.15;
       const progress = clamp((start - rect.top) / (start - end), 0, 1);
+
       const length = motionPath.getTotalLength();
       const point = motionPath.getPointAtLength(length * progress);
 
       const svgRect = timelineSvg.getBoundingClientRect();
       const timelineRect = timeline.getBoundingClientRect();
+
       const scaleX = svgRect.width / 230;
       const scaleY = svgRect.height / 690;
 
-      const x = svgRect.left - timelineRect.left + point.x * scaleX;
-      const y = svgRect.top - timelineRect.top + point.y * scaleY;
-
-      movingHeart.style.left = `${x}px`;
-      movingHeart.style.top = `${y}px`;
+      movingHeart.style.left = `${svgRect.left - timelineRect.left + point.x * scaleX}px`;
+      movingHeart.style.top = `${svgRect.top - timelineRect.top + point.y * scaleY}px`;
     }
+
+    window.addEventListener("scroll", updateTimelineHeart, { passive: true });
+    window.addEventListener("resize", updateTimelineHeart);
+    window.addEventListener("load", updateTimelineHeart);
+    updateTimelineHeart();
+
+    const countDays = document.getElementById("countDays");
+    const countHours = document.getElementById("countHours");
+    const countMinutes = document.getElementById("countMinutes");
+    const countSeconds = document.getElementById("countSeconds");
 
     function updateCountdown() {
       if (!countDays || !countHours || !countMinutes || !countSeconds) return;
@@ -1255,24 +1257,15 @@
       const now = new Date();
       const diff = Math.max(weddingDate - now, 0);
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      countDays.textContent = String(days).padStart(2, "0");
-      countHours.textContent = String(hours).padStart(2, "0");
-      countMinutes.textContent = String(minutes).padStart(2, "0");
-      countSeconds.textContent = String(seconds).padStart(2, "0");
+      countDays.textContent = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, "0");
+      countHours.textContent = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, "0");
+      countMinutes.textContent = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, "0");
+      countSeconds.textContent = String(Math.floor((diff / 1000) % 60)).padStart(2, "0");
     }
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
-    window.addEventListener("scroll", updateTimelineHeart, { passive: true });
-    window.addEventListener("resize", updateTimelineHeart);
-    window.addEventListener("load", updateTimelineHeart);
-    updateTimelineHeart();
-  </script>
+  });
+</script>
 </body>
 </html>
