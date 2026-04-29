@@ -1139,7 +1139,7 @@
     </footer>
   </main>
 
-  <audio id="weddingMusic" loop preload="none">
+  <audio id="weddingMusic" loop preload="auto" playsinline>
     <source src="assets/audio/wedding-song.mp3" type="audio/mpeg">
   </audio>
 
@@ -1176,30 +1176,17 @@
     }
 
     function setMusicProgress() {
-      if (!weddingMusic || !musicPlayer || !musicProgress) return;
-
-      const source = weddingMusic.querySelector("source");
-      const hasTrack = source && source.getAttribute("src");
-
-      if (!hasTrack) {
-        const fallbackProgress = musicPlayer.classList.contains("playing") ? 34 : 0;
-        musicProgress.style.width = `${fallbackProgress}%`;
-        return;
-      }
-
-      if (!Number.isFinite(weddingMusic.duration) || weddingMusic.duration === 0) {
-        musicProgress.style.width = "0%";
-        return;
-      }
-
+      if (!weddingMusic || !musicProgress || !weddingMusic.duration) return;
+    
       const progress = (weddingMusic.currentTime / weddingMusic.duration) * 100;
       musicProgress.style.width = `${progress}%`;
     }
-
+    
     if (musicButton && weddingMusic && musicPlayer) {
       musicButton.addEventListener("click", async (event) => {
+        event.preventDefault();
         event.stopPropagation();
-
+    
         try {
           if (weddingMusic.paused) {
             await weddingMusic.play();
@@ -1208,18 +1195,16 @@
             weddingMusic.pause();
             musicPlayer.classList.remove("playing");
           }
-
-          setMusicProgress();
         } catch (error) {
-          console.warn("Музыка не запустилась. Проверь путь assets/audio/wedding-song.mp3", error);
+          console.log("Ошибка запуска музыки:", error);
         }
       });
-
+    
       weddingMusic.addEventListener("timeupdate", setMusicProgress);
-      weddingMusic.addEventListener("loadedmetadata", setMusicProgress);
+    
       weddingMusic.addEventListener("ended", () => {
         musicPlayer.classList.remove("playing");
-        setMusicProgress();
+        musicProgress.style.width = "0%";
       });
     }
 
