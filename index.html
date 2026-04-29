@@ -717,8 +717,9 @@
 
     .photo-torn {
        width: 100%;
-       margin-left: calc(50% - 50vw);
-       margin-right: calc(50% - 50vw);
+       position: relative;
+       margin: 52px 0 0;
+       overflow: visible;
     }
 
     .photo-torn img {
@@ -728,7 +729,7 @@
     }
     
     .venue-photo {
-      background-image: url("assets/images/venue.jpg");
+      background-image: none;
     }
 
     /* Dress code */
@@ -1090,7 +1091,7 @@
         <a class="route-btn" href="https://maps.google.com/?q=пос.%20Новотроицк%2C%20ул.%20Цветочная%2024" target="_blank" rel="noreferrer">Построить маршрут</a>
       </div>
 
-      <div class="photo-torn torn-top torn-bottom">
+      <div class="photo-torn venue-photo torn-top torn-bottom">
         <img src="assets/images/venue.jpg" alt="">
       </div>
     </section>
