@@ -602,11 +602,12 @@
 
     .event {
       position: absolute;
-      width: 155px;
+      width: 142px;
+      z-index: 5;
     }
 
     .event h3 {
-      font-size: 39px;
+      font-size: 36px;
       color: var(--text);
     }
 
@@ -620,21 +621,23 @@
     }
 
     .event-1 {
-      right: 2px;
-      top: 78px;
+      right: 0;
+      top: 86px;
+      text-align: left;
     }
-
+    
     .event-2 {
       left: 0;
-      top: 250px;
+      top: 252px;
       text-align: right;
     }
-
+    
     .event-3 {
-      right: 8px;
-      top: 430px;
+      right: 0;
+      top: 440px;
+      text-align: left;
     }
-
+    
     .event-4 {
       left: 0;
       top: 590px;
@@ -923,40 +926,6 @@
       .music-wrap {
         padding-inline: 22px;
       }
-
-    @media (max-width: 768px) {
-    
-      /* немного сдвигаем линию левее центра */
-      .path-svg {
-        left: 48%;
-      }
-    
-      /* левый блок — уводим дальше влево */
-      .event-left {
-        left: 0;
-        width: 42%;
-        text-align: right;
-        padding-right: 20px;
-      }
-    
-      /* правый блок — уводим дальше вправо */
-      .event-right {
-        right: 0;
-        width: 42%;
-        text-align: left;
-        padding-left: 20px;
-      }
-    
-      /* время чуть меньше, чтобы не ломалось */
-      .event p {
-        font-size: 14px;
-      }
-    
-      /* сердце — немного вправо от линии */
-      .heart {
-        left: 52%;
-        transform: translateX(-50%);
-      }  
     }
   </style>
 </head>
@@ -1066,7 +1035,7 @@
           <div class="day target">
             29
             <svg viewBox="0 0 72 64" aria-hidden="true">
-              <path d="M36 56 C23 44 10 34 10 21 C10 12 16 7 24 7 C30 7 34 11 36 16 C38 11 43 7 49 7 C57 7 63 12 63 21 C63 34 49 44 36 56 Z" />
+              <path id="motionPath" class="path-line" d="M150 0 C78 95 222 145 92 240 C12 300 156 365 102 462 C54 548 185 575 122 690" />
             </svg>
           </div>
 
