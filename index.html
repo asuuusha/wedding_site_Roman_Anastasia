@@ -923,6 +923,40 @@
       .music-wrap {
         padding-inline: 22px;
       }
+
+    @media (max-width: 768px) {
+    
+      /* немного сдвигаем линию левее центра */
+      .path-svg {
+        left: 48%;
+      }
+    
+      /* левый блок — уводим дальше влево */
+      .event-left {
+        left: 0;
+        width: 42%;
+        text-align: right;
+        padding-right: 20px;
+      }
+    
+      /* правый блок — уводим дальше вправо */
+      .event-right {
+        right: 0;
+        width: 42%;
+        text-align: left;
+        padding-left: 20px;
+      }
+    
+      /* время чуть меньше, чтобы не ломалось */
+      .event p {
+        font-size: 14px;
+      }
+    
+      /* сердце — немного вправо от линии */
+      .heart {
+        left: 52%;
+        transform: translateX(-50%);
+      }  
     }
   </style>
 </head>
