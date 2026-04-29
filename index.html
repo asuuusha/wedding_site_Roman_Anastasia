@@ -541,10 +541,10 @@
       position: absolute;
       left: 50%;
       top: 0;
-      width: 260px;
-      height: 720px;
+      width: 230px;
+      height: 690px;
       transform: translateX(-50%);
-      overflow: hidden;
+      overflow: visible;
       pointer-events: none;
     }
 
@@ -602,39 +602,44 @@
 
     .event {
       position: absolute;
-      width: 145px;
-      z-index: 5;
+      width: 155px;
     }
     
     .event h3 {
-      font-size: 35px;
+      font-size: 39px;
+      color: var(--text);
+    }
+    
+    .event p {
+      margin-top: 6px;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
       color: var(--text);
     }
     
     .event-1 {
-      right: 0;
-      top: 90px;
-      text-align: left;
+      right: 2px;
+      top: 78px;
     }
     
     .event-2 {
       left: 0;
-      top: 260px;
+      top: 250px;
       text-align: right;
     }
     
     .event-3 {
-      right: 0;
-      top: 460px;
-      text-align: left;
+      right: 8px;
+      top: 430px;
     }
     
     .event-4 {
       left: 0;
-      top: 620px;
+      top: 590px;
       text-align: right;
     }
-
     /* Location */
 
     .location {
@@ -1038,8 +1043,12 @@
       <h2 class="section-title script program-title">Программа дня</h2>
 
       <div class="timeline reveal" id="timeline">
-        <svg class="path-svg" id="timelineSvg" viewBox="0 0 260 720" aria-hidden="true">
-          <path id="motionPath" class="path-line" d="M130 0 C70 95 190 150 118 245 C62 325 170 390 124 485 C88 565 160 625 118 720" />
+        <svg class="path-svg" id="timelineSvg" viewBox="0 0 230 690" aria-hidden="true">
+          <path
+            id="motionPath"
+            class="path-line"
+            d="M115 0 C42 98 178 160 112 245 C54 318 168 398 113 480 C76 548 130 610 84 690"
+          />
         </svg>
 
         <span class="moving-heart" id="movingHeart"></span>
