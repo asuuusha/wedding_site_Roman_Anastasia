@@ -1,23 +1,31 @@
 :root {
   --bg: #f6eee4;
   --olive: #9eab95;
+  --olive-dark: #7f8a63;
   --text: #2e241f;
+
   --script: "Great Vibes", cursive;
   --serif: "Cormorant Garamond", serif;
   --sans: "Montserrat", sans-serif;
 }
 
+/* RESET */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background: var(--bg);
-  font-family: var(--serif);
   color: var(--text);
+  font-family: var(--serif);
   overflow-x: hidden;
+}
+
+.site {
+  max-width: 430px;
+  margin: 0 auto;
 }
 
 /* ================= HERO ================= */
@@ -39,10 +47,59 @@ body {
   font-size: 64px;
   color: white;
   text-align: center;
-  padding-top: 60%;
+  padding-top: 55%;
 }
 
-/* ================= TORN EDGE ================= */
+/* ================= TEXT BLOCK ================= */
+
+.section {
+  padding: 50px 24px;
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--script);
+  font-size: 46px;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-family: var(--sans);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+/* ================= MUSIC ================= */
+
+.music-player {
+  margin: 40px auto;
+  width: 280px;
+}
+
+.music-control {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--olive);
+  color: white;
+  margin: 0 auto;
+}
+
+.music-progress {
+  margin-top: 15px;
+  height: 3px;
+  background: #ddd;
+}
+
+.music-progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--olive);
+}
+
+/* ================= TORN EDGE (FIXED) ================= */
 
 .torn-top,
 .torn-bottom {
@@ -53,54 +110,29 @@ body {
 .torn-bottom::after {
   content: "";
   position: absolute;
+  left: 0;
   width: 100%;
   height: 100px;
-  left: 0;
   background: var(--bg);
+  z-index: 5;
 
   -webkit-mask-image: url("assets/images/torn-edge.png");
   mask-image: url("assets/images/torn-edge.png");
 
   -webkit-mask-repeat: repeat-x;
   mask-repeat: repeat-x;
+
+  -webkit-mask-size: auto 100%;
+  mask-size: auto 100%;
 }
 
 .torn-top::before {
-  top: 0;
+  top: -1px;
   transform: rotate(180deg);
 }
 
 .torn-bottom::after {
-  bottom: 0;
-}
-
-/* ================= MUSIC ================= */
-
-.music-player {
-  margin: 40px auto;
-  width: 300px;
-  text-align: center;
-}
-
-.music-control {
-  background: var(--olive);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  color: white;
-}
-
-.music-progress {
-  height: 3px;
-  background: #ccc;
-  margin-top: 15px;
-}
-
-.music-progress span {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: var(--olive);
+  bottom: -1px;
 }
 
 /* ================= VENUE ================= */
@@ -126,5 +158,20 @@ body {
 
 .details h2 {
   font-family: var(--script);
-  font-size: 50px;
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+/* ================= BUTTON ================= */
+
+.route-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 24px;
+  background: var(--olive);
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.1em;
 }
