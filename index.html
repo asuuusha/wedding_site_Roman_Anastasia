@@ -97,13 +97,13 @@
       overflow: hidden;
       transition: opacity 900ms ease, visibility 900ms ease;
     }
-
+    
     .envelope-screen.hidden {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
-
+    
     .envelope-stage {
       width: min(100vw, 430px);
       height: 100svh;
@@ -111,9 +111,9 @@
       position: relative;
       overflow: hidden;
       background: var(--olive);
-      perspective: 1200px;
+      perspective: 1400px;
     }
-
+    
     .envelope-cover {
       position: absolute;
       inset: 0;
@@ -121,60 +121,73 @@
       cursor: pointer;
       background: var(--olive);
     }
-
+    
+    /* все части берут одну и ту же картинку */
     .cover-piece {
       position: absolute;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background-image: url("assets/images/envelope-cover.png");
       background-size: 100% 100%;
       background-position: center;
-      transition:
-        transform 1350ms cubic-bezier(.22,.61,.36,1),
-        opacity 1200ms ease,
-        filter 1200ms ease;
-      will-change: transform, opacity;
+      background-repeat: no-repeat;
+      will-change: transform, opacity, filter;
     }
-
+    
+    /* базовая картинка */
     .cover-full {
-      inset: 0;
       z-index: 1;
       opacity: 1;
-      filter: saturate(0.98) contrast(1.02);
+      transition: opacity 450ms ease 180ms;
     }
-
+    
+    /* верхний клапан */
     .cover-top {
-      inset: 0;
-      z-index: 3;
-      clip-path: polygon(0 0, 100% 0, 100% 48%, 50% 58%, 0 48%);
-      transform-origin: top center;
-      opacity: 0;
+      z-index: 5;
+      clip-path: polygon(0 0, 100% 0, 100% 47%, 50% 58%, 0 47%);
+      transform-origin: 50% 47%;
+      transition:
+        transform 1200ms cubic-bezier(.22,.61,.36,1),
+        opacity 900ms ease,
+        filter 900ms ease;
     }
-
+    
+    /* нижняя часть */
     .cover-bottom {
-      inset: 0;
-      z-index: 2;
-      clip-path: polygon(0 48%, 50% 58%, 100% 48%, 100% 100%, 0 100%);
-      transform-origin: bottom center;
-      opacity: 0;
+      z-index: 3;
+      clip-path: polygon(0 47%, 50% 58%, 100% 47%, 100% 100%, 0 100%);
+      transform-origin: 50% 82%;
+      transition:
+        transform 1250ms cubic-bezier(.22,.61,.36,1) 180ms,
+        opacity 1000ms ease 220ms,
+        filter 1000ms ease 220ms;
     }
-
-    .cover-shadow {
-      position: absolute;
-      inset: 0;
+    
+    /* левая створка */
+    .cover-left {
       z-index: 4;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 50% 57%, rgba(46,36,31,0.18), transparent 18%),
-        linear-gradient(to bottom, transparent 0 46%, rgba(46,36,31,0.10) 54%, transparent 68%);
-      opacity: 0;
-      transition: opacity 900ms ease;
+      clip-path: polygon(0 39%, 50% 58%, 0 77%);
+      transform-origin: 0 58%;
+      transition:
+        transform 1100ms cubic-bezier(.22,.61,.36,1) 120ms,
+        opacity 850ms ease 220ms,
+        filter 850ms ease 220ms;
     }
-
+    
+    /* правая створка */
+    .cover-right {
+      z-index: 4;
+      clip-path: polygon(100% 39%, 50% 58%, 100% 77%);
+      transform-origin: 100% 58%;
+      transition:
+        transform 1100ms cubic-bezier(.22,.61,.36,1) 120ms,
+        opacity 850ms ease 220ms,
+        filter 850ms ease 220ms;
+    }
+    
+    /* кликабельная зона по печати */
     .cover-click-zone {
       position: absolute;
-      z-index: 8;
+      z-index: 10;
       left: 50%;
       top: 57%;
       width: 150px;
@@ -184,10 +197,11 @@
       background: transparent;
       color: transparent;
     }
-
+    
+    /* подпись */
     .cover-hint {
       position: absolute;
-      z-index: 7;
+      z-index: 9;
       left: 50%;
       bottom: 34px;
       transform: translateX(-50%);
@@ -200,42 +214,46 @@
       text-shadow: 0 3px 12px rgba(46,36,31,0.18);
       transition: opacity 500ms ease, transform 500ms ease;
     }
-
+    
+    /* ===== анимация открытия ===== */
+    
     .envelope-cover.open .cover-full {
       opacity: 0;
-      transition-delay: 180ms;
     }
-
-    .envelope-cover.open .cover-top,
-    .envelope-cover.open .cover-bottom {
-      opacity: 1;
-    }
-
+    
     .envelope-cover.open .cover-top {
-      transform: translateY(-42%) rotateX(42deg) scale(1.04);
+      transform: rotateX(-125deg) translateY(-18%) scale(1.04);
       opacity: 0;
-      filter: blur(1.2px);
+      filter: blur(1px);
     }
-
+    
+    .envelope-cover.open .cover-left {
+      transform: rotateY(42deg) translateX(-28%) scale(1.03);
+      opacity: 0;
+      filter: blur(1px);
+    }
+    
+    .envelope-cover.open .cover-right {
+      transform: rotateY(-42deg) translateX(28%) scale(1.03);
+      opacity: 0;
+      filter: blur(1px);
+    }
+    
     .envelope-cover.open .cover-bottom {
-      transform: translateY(38%) rotateX(-18deg) scale(1.04);
+      transform: translateY(34%) scale(1.04);
       opacity: 0;
       filter: blur(1.2px);
     }
-
-    .envelope-cover.open .cover-shadow {
-      opacity: 1;
-    }
-
+    
     .envelope-cover.open .cover-hint {
       opacity: 0;
       transform: translateX(-50%) translateY(12px);
     }
-
+    
     .envelope-cover.open .cover-click-zone {
       pointer-events: none;
     }
-
+    
     /* Torn edges */
 
     .torn-bottom,
@@ -921,14 +939,22 @@
 
 <body class="locked">
   <div class="envelope-screen" id="envelopeScreen">
-    <div class="envelope-stage">
-      <div class="envelope-cover" id="invitation">
-        <div class="cover-piece cover-full"></div>
-        <div class="cover-piece cover-top"></div>
-        <div class="cover-piece cover-bottom"></div>
-        <div class="cover-shadow"></div>
-        <button class="cover-click-zone" id="openInvite" aria-label="Открыть приглашение">Открыть</button>
-        <div class="cover-hint">Нажмите на печать</div>
+      <div class="envelope-stage">
+        <div class="envelope-cover" id="invitation">
+    
+          <div class="cover-piece cover-full"></div>
+    
+          <div class="cover-piece cover-top"></div>
+          <div class="cover-piece cover-left"></div>
+          <div class="cover-piece cover-right"></div>
+          <div class="cover-piece cover-bottom"></div>
+    
+          <button class="cover-click-zone" id="openInvite" aria-label="Открыть приглашение">
+            Открыть
+          </button>
+    
+          <div class="cover-hint">Нажмите на печать</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1156,7 +1182,7 @@
           envelopeScreen.classList.add("hidden");
           document.body.classList.remove("locked");
           window.scrollTo({ top: 0, behavior: "instant" });
-        }, 1350);
+        }, 1650);
       });
     }
 
