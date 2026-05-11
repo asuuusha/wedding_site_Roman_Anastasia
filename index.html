@@ -1287,19 +1287,19 @@
     const invitation = document.getElementById("invitation");
 
     function openEnvelope() {
-       if (!invitation || !envelopeScreen) return;
+      if (!invitation || !envelopeScreen) return;
       
-       invitation.classList.add("open");
+      invitation.classList.add("open");
       
-       setTimeout(() => {
-        envelopeScreen.classList.add("leaving");
-       }, 1250);
+      setTimeout(() => {
+      envelopeScreen.classList.add("leaving");
+      }, 1250);
 
-       setTimeout(() => {
-        envelopeScreen.classList.add("hidden");
-        document.body.classList.remove("locked");
-        window.scrollTo({ top: 0, behavior: "instant" });
-        }, 1900);
+      setTimeout(() => {
+      envelopeScreen.classList.add("hidden");
+      document.body.classList.remove("locked");
+      window.scrollTo({ top: 0, behavior: "instant" });
+      }, 1900);
     }
 
     const openInvite = document.getElementById("openInvite");
