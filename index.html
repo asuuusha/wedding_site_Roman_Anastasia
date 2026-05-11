@@ -1300,7 +1300,12 @@
         document.body.classList.remove("locked");
         window.scrollTo({ top: 0, behavior: "instant" });
         }, 1900);
-      });
+    }
+
+    const openInvite = document.getElementById("openInvite");
+
+    if (openInvite) {
+      openInvite.addEventListener("click", openEnvelope);
     }
 
     const musicButton = document.getElementById("musicButton");
