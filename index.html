@@ -184,11 +184,6 @@
       position: absolute;
       inset: 0;
       z-index: 4;
-      /* Накладываем SVG фильтр */
-      filter: url(#paper-texture) drop-shadow(0 28px 34px rgba(46,36,31,0.2));
-  
-      /* Дополнительно: можно наложить полупрозрачную картинку реальной бумаги для ворсистости */
-      background-blend-mode: multiply;
     }
 
     /* Боковые складки (B, D) и низ (C) */
@@ -208,7 +203,6 @@
       inset: 0;
       z-index: 6; /* В начале сверху всех */
       background: var(--olive-mid);
-      filter: url(#paper-texture);
       clip-path: polygon(0 0, 50% 50%, 100% 0); /* Сначала треугольник как "С", но сверху */
       transform-origin: top center;
       transition: transform 1000ms cubic-bezier(.22,.61,.36,1) 200ms, 
@@ -1191,16 +1185,6 @@
   <audio id="weddingMusic" loop preload="auto" playsinline>
     <source src="assets/audio/wedding.mp3" type="audio/mpeg">
   </audio>
-
-  <svg style="display: none;">
-    <filter id="paper-texture">
-      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
-      <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="1.5">
-        <feDistantLight azimuth="45" elevation="60" />
-      </feDiffuseLighting>
-      <feComposite operator="arithmetic" k1="1" k2="0" k3="0" k4="0" in2="SourceGraphic" />
-    </filter>
-  </svg>
 
   <script>
   document.addEventListener("DOMContentLoaded", () => {
