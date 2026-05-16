@@ -888,18 +888,24 @@
         scale(1.03);
     }
     
+    /* Новые стили для блока подсказки (справа) */
     .gift-hint {
       position: absolute;
-      left: 50px;
-      top: 10px;
-      width: 260px;
-      height: 140px;
+      /* Позиционируем блок справа от кошки */
+      right: -170px;
+      top: 50px;
+      width: 180px;
+      height: 100px;
       pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
     }
     
     .gift-hint svg {
       width: 100%;
-      height: 100%;
+      height: 60px; /* Высота самой стрелки */
       overflow: visible;
     }
     
@@ -911,19 +917,18 @@
       stroke-linejoin: round;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.18));
     }
-    
-    .gift-hint span {
-      position: absolute;
-      left: 92px;
-      top: 48px;
+
+    /* Стиль для надписи над стрелкой */
+    .gift-hint-text {
       font-family: var(--sans);
       font-size: 15px;
       font-weight: 300;
-      line-height: 1.65;
+      line-height: 1.2;
       letter-spacing: 0.05em;
       color: white;
       text-shadow: 0 8px 20px rgba(0,0,0,0.25);
       white-space: nowrap;
+      margin-bottom: 5px; /* Отступ до стрелки */
     }
     
     /* Footer */
@@ -1230,17 +1235,18 @@
       <p>Если вы планировали порадовать нас букетом, можно вместо него добавить эту сумму к денежному подарку — для нас это будет очень тёплым вкладом в будущие путешествия молодой семьи :)</p>
       <div class="gift-action">
         <div class="gift-hint">
-          <svg viewBox="0 0 260 140" aria-hidden="true">
+          <span class="gift-hint-text">*тык сюда*</span>
+          
+          <svg viewBox="0 0 180 60" aria-hidden="true">
             <path
               class="gift-arrow-line"
-              d="M20 40 C90 0 170 10 220 55"
+              d="M160 10 C100 0 50 15 15 45"
             />
             <path
               class="gift-arrow-tip"
-              d="M195 30 L223 55 L185 60"
+              d="M40 30 L13 47 L45 55"
             />
           </svg>
-          <span>*тык сюда*</span>
         </div>
         <a class="gift-cat-link" href="https://messenger.online.sberbank.ru/sl/O5MRBNvrZSuYnBa4r" target="_blank" rel="noreferrer">
           <img src="assets/images/gift-icon.png" alt="Подарок">
