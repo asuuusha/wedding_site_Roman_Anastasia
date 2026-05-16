@@ -907,23 +907,16 @@
       white-space: nowrap;
       margin-bottom: 8px;
     }
-    
-    /* Сама стрелка SVG */
-    .gift-hint svg {
-      width: 100%;
+
+    .gift-arrow-img {
+      display: block;
+      width: 150px;
       height: auto;
-      overflow: visible;
+      margin-top: 4px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.22));
+      pointer-events: none;
     }
-    
-    .gift-hint path {
-      fill: none;
-      stroke: white;
-      stroke-width: 4.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-    }
-    
+   
     /* Footer */
 
     .footer {
@@ -1232,17 +1225,8 @@
         </a>
 
         <div class="gift-hint">
-          <span class="gift-hint-text">*тык сюда*</span>
-          <svg viewBox="0 0 160 70" aria-hidden="true">
-            <path
-              class="gift-arrow-line"
-              d="M150 15 C100 2 50 15 15 45"
-            />
-            <path
-              class="gift-arrow-tip"
-              d="M40 49 L15 45 L42 20"
-            />
-          </svg>
+          <span class="gift-hint-text">*тык на кошку*</span>
+          <img class="gift-arrow-img" src="assets/images/arrow.png" alt="">
         </div>
       </div>
     </section>
