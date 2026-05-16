@@ -853,18 +853,18 @@
 
     .gift-action {
       position: relative;
-      width: 260px;
-      height: 190px;
-      margin: 18px auto 0;
+      width: 100px;
+      height: 320px;
+      margin-top: 10px;
     }
     
     .gift-cat-link {
       position: absolute;
-      left: 66px;
+      left: 34px;
       top: 54px;
       display: block;
-      width: 120px;
-      transition: transform 250ms ease;
+      width: 200px;
+      transition: translateX(-50%);
       text-decoration: none;
       color: transparent;
       font-size: 0;
@@ -880,22 +880,26 @@
     .gift-cat-link:active {
       transform: scale(0.96);
     }
+
+    .gift-cat-link:hover {
+      transform:
+        translateX(-50%)
+        translateY(-4px)
+        scale(1.03);
+    }
     
     .gift-hint {
       position: absolute;
-      left: 24px;
-      top: 0;
-      width: 190px;
-      height: 90px;
+      left: 50px;
+      top: 10px;
+      width: 260px;
+      height: 140px;
       pointer-events: none;
     }
     
     .gift-hint svg {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 180px;
-      height: 80px;
+      width: 100%;
+      height: 100%;
       overflow: visible;
     }
     
@@ -910,8 +914,8 @@
     
     .gift-hint span {
       position: absolute;
-      left: 82px;
-      top: 58px;
+      left: 92px;
+      top: 48px;
       font-family: var(--sans);
       font-size: 15px;
       font-weight: 300;
@@ -1226,9 +1230,15 @@
       <p>Если вы планировали порадовать нас букетом, можно вместо него добавить эту сумму к денежному подарку — для нас это будет очень тёплым вкладом в будущие путешествия молодой семьи :)</p>
       <div class="gift-action">
         <div class="gift-hint">
-          <svg viewBox="0 0 180 80" aria-hidden="true">
-            <path d="M10 55 C55 5 120 10 160 42" />
-            <path d="M145 22 L162 43 L134 48" />
+          <svg viewBox="0 0 260 140" aria-hidden="true">
+            <path
+              class="gift-arrow-line"
+              d="M20 40 C90 0 170 10 220 55"
+            />
+            <path
+              class="gift-arrow-tip"
+              d="M195 30 L223 55 L185 60"
+            />
           </svg>
           <span>*тык сюда*</span>
         </div>
