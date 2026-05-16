@@ -851,23 +851,26 @@
       text-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
+    /* Весь контейнер блока подарка */
     .gift-action {
       position: relative;
-      width: 100px;
-      height: 320px;
-      margin-top: 10px;
+      width: 100%;
+      max-width: 330px;
+      height: 240px;
+      margin: 20px auto 0;
+      display: flex;
+      align-items: flex-end; /* Выравниваем элементы по нижней линии */
+      justify-content: flex-start; /* Кошка всегда прижата к левому краю */
     }
     
+    /* Ссылка-картинка (Кошка) — теперь фиксированно слева */
     .gift-cat-link {
-      position: absolute;
-      left: 34px;
-      top: 54px;
+      position: relative;
       display: block;
-      width: 200px;
-      transition: translateX(-50%);
+      width: 160px; /* Немного уменьшили, чтобы стрелка красиво помещалась справа */
       text-decoration: none;
-      color: transparent;
-      font-size: 0;
+      z-index: 5;
+      transition: transform 0.3s ease;
     }
     
     .gift-cat-link img {
@@ -877,58 +880,50 @@
       filter: drop-shadow(0 10px 16px rgba(0,0,0,0.16));
     }
     
+    /* Эффект при нажатии на кошку */
     .gift-cat-link:active {
       transform: scale(0.96);
     }
 
-    .gift-cat-link:hover {
-      transform:
-        translateX(-50%)
-        translateY(-4px)
-        scale(1.03);
-    }
-    
-    /* Новые стили для блока подсказки (справа) */
+    /* Подсказка со стрелкой и текстом (находится строго справа от кошки) */
     .gift-hint {
       position: absolute;
-      /* Позиционируем блок справа от кошки */
-      right: -170px;
-      top: 50px;
-      width: 180px;
-      height: 100px;
-      pointer-events: none;
+      right: 0;
+      bottom: 40px; /* Подняли чуть выше лапок кошки */
+      width: 160px;
       display: flex;
       flex-direction: column;
       align-items: center;
       z-index: 10;
+      pointer-events: none;
     }
     
+    /* Надпись над стрелкой */
+    .gift-hint-text {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: white;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      white-space: nowrap;
+      margin-bottom: 8px;
+    }
+    
+    /* Сама стрелка SVG */
     .gift-hint svg {
       width: 100%;
-      height: 60px; /* Высота самой стрелки */
+      height: auto;
       overflow: visible;
     }
     
     .gift-hint path {
       fill: none;
       stroke: white;
-      stroke-width: 5;
+      stroke-width: 4.5;
       stroke-linecap: round;
       stroke-linejoin: round;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.18));
-    }
-
-    /* Стиль для надписи над стрелкой */
-    .gift-hint-text {
-      font-family: var(--sans);
-      font-size: 15px;
-      font-weight: 300;
-      line-height: 1.2;
-      letter-spacing: 0.05em;
-      color: white;
-      text-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      white-space: nowrap;
-      margin-bottom: 5px; /* Отступ до стрелки */
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
     }
     
     /* Footer */
@@ -1234,23 +1229,23 @@
       <p>Просим не дарить нам цветы. Их любит не только невеста, но и кошка, которая с удовольствием их съест.</p>
       <p>Если вы планировали порадовать нас букетом, можно вместо него добавить эту сумму к денежному подарку — для нас это будет очень тёплым вкладом в будущие путешествия молодой семьи :)</p>
       <div class="gift-action">
+        <a class="gift-cat-link" href="https://messenger.online.sberbank.ru/sl/O5MRBNvrZSuYnBa4r" target="_blank" rel="noreferrer">
+          <img src="assets/images/gift-icon.png" alt="Подарок кошка">
+        </a>
+
         <div class="gift-hint">
           <span class="gift-hint-text">*тык сюда*</span>
-          
-          <svg viewBox="0 0 180 60" aria-hidden="true">
+          <svg viewBox="0 0 160 70" aria-hidden="true">
             <path
               class="gift-arrow-line"
-              d="M160 10 C100 0 50 15 15 45"
+              d="M150 15 C100 2 50 15 15 45"
             />
             <path
               class="gift-arrow-tip"
-              d="M40 30 L13 47 L45 55"
+              d="M38 34 C30 38 22 41 12 46 C22 49 32 53 38 60"
             />
           </svg>
         </div>
-        <a class="gift-cat-link" href="https://messenger.online.sberbank.ru/sl/O5MRBNvrZSuYnBa4r" target="_blank" rel="noreferrer">
-          <img src="assets/images/gift-icon.png" alt="Подарок">
-        </a>
       </div>
     </section>
 
