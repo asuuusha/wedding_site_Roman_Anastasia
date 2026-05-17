@@ -546,7 +546,7 @@
       stroke-linejoin: round;
       stroke-dasharray: 180;
       stroke-dashoffset: 180;
-      transition: stroke-dashoffset 2600ms cubic-bezier(.22,.61,.36,1);
+      transition: stroke-dashoffset 4000ms cubic-bezier(.22,.61,.36,1);
     }
 
     .month-calendar.visible .day.target path {
@@ -1332,7 +1332,7 @@
         if (entry.isIntersecting) entry.target.classList.add("visible");
       });
     }, {
-      threshold: 0.55,
+      threshold: 0.15,
       rootMargin: "0px 0px -40px 0px"
     });
 
